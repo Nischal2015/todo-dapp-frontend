@@ -1,14 +1,14 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import "./App.css";
+import { Container, PrimaryHeading, SecondaryHeading } from "./components";
+import datas from "./data.json";
+import { Todo } from "./pages";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <div className='App'>
-      <h1>This is the Todo dapp</h1>
-    </div>
+    <Container>
+      <PrimaryHeading>Todo App</PrimaryHeading>
+      <SecondaryHeading>Left to Complete</SecondaryHeading>
+      <Todo />
+    </Container>
   );
 }
 
