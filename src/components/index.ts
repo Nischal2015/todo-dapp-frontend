@@ -1,10 +1,14 @@
 export * from "./Avatar";
 
+export * from "./AddButton";
+
 export * from "./Button";
 
 export * from "./Container";
 
-export * from "../pages/Todo/List";
+export * from "./Grid";
+
+export * from "./Modal";
 
 export * from "./PrimaryHeading";
 

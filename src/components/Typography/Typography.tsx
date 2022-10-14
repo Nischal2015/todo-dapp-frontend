@@ -1,4 +1,3 @@
-import styled from "@emotion/styled";
 import { TypographyProps, StyledTypographyProps } from "./Typography.d";
 import { StyledTypography } from "./Styles";
 
