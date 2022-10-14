@@ -26,7 +26,6 @@ function ConnectWallet() {
   };
 
   const correctNetworkElement = () => {
-    // console.log(!correctNetwork);
     if (!correctNetwork)
       return (
         <Modal

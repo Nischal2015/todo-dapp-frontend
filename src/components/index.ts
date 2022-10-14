@@ -4,6 +4,8 @@ export * from "./AddButton";
 
 export * from "./Button";
 
+export * from "./ConnectWallet";
+
 export * from "./Container";
 
 export * from "./Grid";

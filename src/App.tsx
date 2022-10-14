@@ -1,6 +1,10 @@
-import { Container, PrimaryHeading, SecondaryHeading } from "./components";
+import {
+  Container,
+  PrimaryHeading,
+  SecondaryHeading,
+  ConnectWallet,
+} from "./components";
 import { Todo } from "./pages";
-import ConnectWallet from "./pages/Todo/ConnectWallet/ConnectWallet";
 
 function App() {
   return (

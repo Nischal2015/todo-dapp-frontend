@@ -25,7 +25,7 @@ export const StyledModalOverlay = styled.div({
   width: "100%",
   zIndex: "50",
   backgroundColor: "rgba(5,3,12,0.6)",
-  backdropFilter: "blur(4px)",
+  backdropFilter: "blur(10px)",
 });
 
 export const StyledModalGuts = styled.div({
