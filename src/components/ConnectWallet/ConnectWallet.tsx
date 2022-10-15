@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Modal, SecondaryHeading, Typography } from "~/components";
+import { Button, Modal, Typography } from "~/components";
 import { useConnectWallet } from "~/hooks";
 import { BellAlertIcon } from "@heroicons/react/24/solid";
 import { StyledGrid, StyledFlexBox } from "./Styles";
@@ -29,6 +29,7 @@ function ConnectWallet() {
     if (!correctNetwork)
       return (
         <Modal
+          variant='contained'
           openModal={openModal}
           setOpenModal={setOpenModal}
           renderContent={
@@ -37,14 +38,18 @@ function ConnectWallet() {
                 <BellAlertIcon />
                 <StyledFlexBox>
                   <div>
-                    <SecondaryHeading>Alert Info</SecondaryHeading>
-                    <Typography fontSize='1.6rem'>
+                    <Typography as='h2' color='white'>
+                      Alert Info
+                    </Typography>
+                    <Typography fontSize='1.6rem' color='white'>
                       The network used with this account is not Goerli. We
                       suggest you switch to Goerli Network to use the app's
                       functionality.
                     </Typography>
                   </div>
-                  <Button onClick={onClickHandler}>Switch to Goerli</Button>
+                  <Button onClick={onClickHandler} variant='outlined'>
+                    Switch to Goerli
+                  </Button>
                 </StyledFlexBox>
               </StyledGrid>
             </>

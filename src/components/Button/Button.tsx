@@ -3,11 +3,18 @@ import { StyledButton } from "./Styles";
 
 function Button({
   children,
-  onClick = () => {},
   disabled = false,
+  onClick = () => {},
+  variant = "contained",
+  color = "primary",
 }: ButtonProps) {
   return (
-    <StyledButton onClick={onClick} disabled={disabled}>
+    <StyledButton
+      onClick={onClick}
+      disabled={disabled}
+      variant={variant}
+      color={color}
+    >
       {children}
     </StyledButton>
   );

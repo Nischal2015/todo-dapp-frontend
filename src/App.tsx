@@ -1,17 +1,13 @@
-import {
-  Container,
-  PrimaryHeading,
-  SecondaryHeading,
-  ConnectWallet,
-} from "./components";
-import { Todo } from "./pages";
+import { Container, ConnectWallet, Typography, TextField } from "./components";
+import { CreateTodo, Todo } from "./pages";
 
 function App() {
   return (
     <Container>
-      <PrimaryHeading>Todo App</PrimaryHeading>
+      <Typography as='h1'>Todo App</Typography>
       <ConnectWallet />
-      <SecondaryHeading>Left to Complete</SecondaryHeading>
+      <CreateTodo />
+      <Typography as='h2'>Left to Complete</Typography>
       <Todo />
     </Container>
   );

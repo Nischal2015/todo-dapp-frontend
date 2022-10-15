@@ -12,12 +12,10 @@ export * from "./Grid";
 
 export * from "./Modal";
 
-export * from "./PrimaryHeading";
-
-export * from "./SecondaryHeading";
-
 export * from "./TaskDone";
 
 export * from "./TaskLeft";
+
+export * from "./TextField";
 
 export * from "./Typography";

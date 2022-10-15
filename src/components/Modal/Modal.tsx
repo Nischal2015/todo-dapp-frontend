@@ -2,7 +2,12 @@ import { createPortal } from "react-dom";
 import { ModalProps } from "./Modal.d";
 import { StyledModalOverlay, StyledModal, StyledModalGuts } from "./Style";
 
-function Modal({ openModal, setOpenModal, renderContent = <></> }: ModalProps) {
+function Modal({
+  openModal,
+  setOpenModal,
+  variant = "outlined",
+  renderContent = <></>,
+}: ModalProps) {
   const $root = document.getElementById("root") as HTMLElement;
 
   const closeModalHandler = () => {
@@ -14,7 +19,7 @@ function Modal({ openModal, setOpenModal, renderContent = <></> }: ModalProps) {
         createPortal(
           <>
             <StyledModalOverlay />
-            <StyledModal>
+            <StyledModal variant={variant}>
               <StyledModalGuts>{renderContent}</StyledModalGuts>
             </StyledModal>
           </>,

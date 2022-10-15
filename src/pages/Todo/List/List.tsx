@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { IListProps, ListProps } from "./List.d";
 import { ListItem } from "./ListItem";
 import { Droppable } from "react-beautiful-dnd";
-import { SecondaryHeading } from "~/components";
+import { Typography } from "~/components";
 
 const StyledList = styled.div({
   display: "flex",
@@ -12,7 +12,7 @@ const StyledList = styled.div({
 function List({ datas, column }: IListProps) {
   return (
     <>
-      <SecondaryHeading>{column.title}</SecondaryHeading>
+      <Typography as='h2'>{column.title}</Typography>
       <Droppable droppableId={column.id}>
         {(provided) => (
           <StyledList ref={provided.innerRef} {...provided.droppableProps}>

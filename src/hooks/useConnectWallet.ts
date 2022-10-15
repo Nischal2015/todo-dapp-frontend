@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 interface IUseConnectWallet {
   walletExistCheck: () => any;
   currentAccount: string | undefined;
-  correctNetwork: Promise<boolean> | boolean;
+  correctNetwork: boolean;
   setCorrectNetwork(value: boolean): void;
   connectWallet(): void;
   disable: boolean;
@@ -18,6 +18,10 @@ function startApp(provider: any) {
 const GOERLI_CHAIN_ID = "0x5";
 
 export const useConnectWallet = (): IUseConnectWallet => {
+  const [correctNetwork, setCorrectNetwork] = useState<boolean>(false);
+  const [currentAccount, setCurrentAccount] = useState<string | undefined>("");
+  const [disable, setDisable] = useState<boolean>(false);
+
   const walletExistCheck = async () => {
     try {
       let { ethereum } = window;
@@ -45,14 +49,6 @@ export const useConnectWallet = (): IUseConnectWallet => {
       return false;
     }
   };
-
-  const [correctNetwork, setCorrectNetwork] = useState<boolean>(false);
-  const [currentAccount, setCurrentAccount] = useState<string | undefined>("");
-  const [disable, setDisable] = useState<boolean>(false);
-
-  isCorrectNetwork().then((val) => {
-    return val;
-  });
 
   const connectWallet = async () => {
     try {
