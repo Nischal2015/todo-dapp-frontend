@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { DragDropContext } from "react-beautiful-dnd";
+import { DragDropContext } from "@hello-pangea/dnd";
 import { List } from "./List";
 import { TodoProps } from "./Todo.d";
 
-function Todo({ datas }: TodoProps) {
+function Todo({ datas, updateTodo }: TodoProps) {
   const [initialData, setInitialData] = useState(datas);
   const onDragEnd = (result: any) => {
     const { draggableId, destination, source } = result;
@@ -49,7 +49,14 @@ function Todo({ datas }: TodoProps) {
           (taskId: string) =>
             initialData.todos[taskId as keyof typeof datas.todos]
         );
-        return <List key={column.id} datas={tasks} column={column} />;
+        return (
+          <List
+            key={column.id}
+            datas={tasks}
+            column={column}
+            updateTodo={updateTodo}
+          />
+        );
       })}
     </DragDropContext>
   );

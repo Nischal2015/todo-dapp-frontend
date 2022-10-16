@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { IListProps, ListProps } from "./List.d";
 import { ListItem } from "./ListItem";
-import { Droppable } from "react-beautiful-dnd";
+import { Droppable } from "@hello-pangea/dnd";
 import { Typography } from "~/components";
 
 const StyledList = styled.div({
@@ -9,7 +9,7 @@ const StyledList = styled.div({
   flexDirection: "column",
 });
 
-function List({ datas, column }: IListProps) {
+function List({ datas, column, updateTodo }: IListProps) {
   return (
     <>
       <Typography as='h2'>{column.title}</Typography>
@@ -22,6 +22,7 @@ function List({ datas, column }: IListProps) {
                 title={data.title}
                 id={data.id}
                 index={index}
+                updateTodo={updateTodo}
               />
             ))}
             {provided.placeholder}

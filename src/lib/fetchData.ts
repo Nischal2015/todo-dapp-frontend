@@ -11,6 +11,7 @@ export type TodoProps = {
 
 type ReturnProps = {
   allTodo: TodoProps[];
+  todo: any;
   getAllTodo(): void;
   addTodo(title: string, description: string): void;
   getTodo(taskId: number): void;
@@ -20,7 +21,7 @@ type ReturnProps = {
 
 export const fetchData = (): ReturnProps => {
   let [allTodo, setAllTodo] = useState<TodoProps[]>([]);
-  console.log({ allTodo });
+  let [todo, setTodo] = useState([]);
   let TaskContract: ethers.Contract;
   try {
     const { ethereum } = window;
@@ -42,6 +43,7 @@ export const fetchData = (): ReturnProps => {
   async function getAllTodo() {
     try {
       const todo = await TaskContract.getTasks();
+      console.log("getall todo running");
       setAllTodo(todo);
     } catch (error) {
       console.log(error);
@@ -62,7 +64,7 @@ export const fetchData = (): ReturnProps => {
   async function getTodo(taskId: number) {
     try {
       const todoById = await TaskContract.getTask(taskId);
-      console.log({ todoById });
+      setTodo(todoById);
     } catch (error) {
       console.log(error);
     }
@@ -74,7 +76,17 @@ export const fetchData = (): ReturnProps => {
     description: string
   ) {
     try {
-    } catch (error) {}
+      const updatedTodo = await TaskContract.updateTask(
+        taskId,
+        title,
+        description
+      );
+      updatedTodo.wait();
+    } catch (error) {
+      console.log(error);
+    } finally {
+      await getAllTodo();
+    }
   }
 
   async function deleteTodo(taskId: number) {
@@ -87,6 +99,7 @@ export const fetchData = (): ReturnProps => {
 
   return {
     allTodo,
+    todo,
     getAllTodo,
     addTodo,
     getTodo,

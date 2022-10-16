@@ -18,4 +18,6 @@ export * from "./TaskLeft";
 
 export * from "./TextField";
 
+export * from "./TodoModalContent";
+
 export * from "./Typography";

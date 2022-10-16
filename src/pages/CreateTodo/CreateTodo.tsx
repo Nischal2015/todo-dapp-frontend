@@ -1,13 +1,16 @@
 import { useRef, useState } from "react";
-import { Button, Modal, TextField, Typography } from "~/components";
-import { XMarkIcon, PlusIcon } from "@heroicons/react/24/solid";
+import { Button, Modal, TodoModalContent } from "~/components";
+import { PlusIcon } from "@heroicons/react/24/solid";
 import { CreateTodoProps } from "./CreateTodo.d";
-import { HoverSpan, Header, Body, Footer } from "./Styles";
 
 function CreateTodo({ addTodo }: CreateTodoProps) {
   const [openModal, setOpenModal] = useState(false);
   const titleRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
+
+  const buttonClickHandler = () => {
+    addTodo(titleRef.current!.value, descriptionRef.current!.value);
+  };
 
   return (
     <>
@@ -19,49 +22,16 @@ function CreateTodo({ addTodo }: CreateTodoProps) {
         openModal={openModal}
         setOpenModal={setOpenModal}
         renderContent={
-          <>
-            <Header>
-              <Typography as='h2'>Create Todo</Typography>
-              <HoverSpan size='3.2rem'>
-                <XMarkIcon
-                  height={28}
-                  onClick={() => setOpenModal(false)}
-                  cursor='pointer'
-                />
-              </HoverSpan>
-            </Header>
-            <Body>
-              <TextField
-                label='Title'
-                variant='contained'
-                placeholder='Todo Name'
-                ref={titleRef}
-              />
-              <TextField
-                as='textarea'
-                label='description'
-                variant='contained'
-                rows={8}
-                placeholder='Todo Description...'
-                ref={descriptionRef}
-              />
-            </Body>
-            <Footer>
-              <Button variant='outlined' onClick={() => setOpenModal(false)}>
-                Cancel
-              </Button>
-              <Button
-                onClick={() => {
-                  addTodo(
-                    titleRef.current!.value,
-                    descriptionRef.current!.value
-                  );
-                }}
-              >
-                Create
-              </Button>
-            </Footer>
-          </>
+          <TodoModalContent
+            heading='Create Todo'
+            titlePlaceholder='Todo Name'
+            descriptionPlaceHolder='Todo description...'
+            buttonText='Create'
+            setOpenModal={setOpenModal}
+            buttonHandler={buttonClickHandler}
+            titleRef={titleRef}
+            descriptionRef={descriptionRef}
+          />
         }
       />
     </>

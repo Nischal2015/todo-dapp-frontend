@@ -5,7 +5,7 @@ import { CreateTodo, Todo } from "./pages";
 import { apiDataShaper } from "./utils";
 
 function App() {
-  const { getAllTodo, allTodo, addTodo } = fetchData();
+  const { getAllTodo, allTodo, addTodo, updateTodo } = fetchData();
 
   useEffect(() => {
     getAllTodo();
@@ -17,7 +17,7 @@ function App() {
       <ConnectWallet />
       <CreateTodo addTodo={addTodo} />
       <Typography as='h2'>Left to Complete</Typography>
-      <Todo datas={apiDataShaper(allTodo)} />
+      <Todo datas={apiDataShaper(allTodo)} updateTodo={updateTodo} />
     </Container>
   );
 }

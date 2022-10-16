@@ -10,6 +10,7 @@ export const StyledDiv = styled.div({
 
 export const StyledListItem = styled.div<StyledListItemProps>(
   {
+    cursor: "pointer",
     display: "grid",
     gridTemplateColumns: "1fr 47fr",
     alignItems: "center",
