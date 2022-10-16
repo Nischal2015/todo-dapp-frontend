@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 import { List } from "./List";
-import datas from "~/data.json";
+import { TodoProps } from "./Todo.d";
 
-function Todo() {
+function Todo({ datas }: TodoProps) {
   const [initialData, setInitialData] = useState(datas);
   const onDragEnd = (result: any) => {
     const { draggableId, destination, source } = result;
@@ -36,6 +36,10 @@ function Todo() {
     };
     setInitialData(newState);
   };
+
+  useEffect(() => {
+    setInitialData(datas);
+  }, [datas]);
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       {initialData.columnOrder.map((columnId) => {

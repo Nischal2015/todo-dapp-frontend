@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Button, Modal, TextField, Typography } from "~/components";
 import { XMarkIcon, PlusIcon } from "@heroicons/react/24/solid";
+import { CreateTodoProps } from "./CreateTodo.d";
 import { HoverSpan, Header, Body, Footer } from "./Styles";
 
-function CreateTodo() {
+function CreateTodo({ addTodo }: CreateTodoProps) {
   const [openModal, setOpenModal] = useState(false);
+  const titleRef = useRef<HTMLInputElement>(null);
+  const descriptionRef = useRef<HTMLTextAreaElement>(null);
 
   return (
     <>
@@ -32,6 +35,7 @@ function CreateTodo() {
                 label='Title'
                 variant='contained'
                 placeholder='Todo Name'
+                ref={titleRef}
               />
               <TextField
                 as='textarea'
@@ -39,13 +43,23 @@ function CreateTodo() {
                 variant='contained'
                 rows={8}
                 placeholder='Todo Description...'
+                ref={descriptionRef}
               />
             </Body>
             <Footer>
               <Button variant='outlined' onClick={() => setOpenModal(false)}>
                 Cancel
               </Button>
-              <Button>Create</Button>
+              <Button
+                onClick={() => {
+                  addTodo(
+                    titleRef.current!.value,
+                    descriptionRef.current!.value
+                  );
+                }}
+              >
+                Create
+              </Button>
             </Footer>
           </>
         }
