@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { ModalVariant } from "./Modal.d";
+import { ModalVariant } from "./Modal";
 
 export const StyledModal = styled.div<ModalVariant>(
   {

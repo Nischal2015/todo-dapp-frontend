@@ -1,6 +1,16 @@
+import { ReactElement } from "react";
 import { createPortal } from "react-dom";
-import { ModalProps } from "./Modal.d";
+import { Variant } from "~/types";
 import { StyledModalOverlay, StyledModal, StyledModalGuts } from "./Style";
+
+export interface ModalVariant {
+  variant?: Variant;
+}
+interface ModalProps extends ModalVariant {
+  openModal: boolean;
+  setOpenModal: (value: boolean) => void;
+  renderContent: ReactElement;
+}
 
 function Modal({
   openModal,

@@ -1,6 +1,19 @@
-import { ElementType, forwardRef } from "react";
-import { TextFieldProps } from "./TextField.d";
+import { ComponentPropsWithRef, ElementType, forwardRef } from "react";
+import { Variant } from "~/types";
 import { StyledLabel, StyledTextField } from "./Style";
+
+type FieldProps<T extends ElementType> = {
+  as?: T;
+  label: string;
+};
+
+export interface TextFieldVariant {
+  variant?: Variant;
+}
+
+export type TextFieldProps<T extends ElementType> = ComponentPropsWithRef<T> &
+  FieldProps<T> &
+  TextFieldVariant;
 
 function TextField<T extends ElementType = "input">(
   props: TextFieldProps<T>,

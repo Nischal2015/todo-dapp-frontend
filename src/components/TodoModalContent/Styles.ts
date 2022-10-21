@@ -1,5 +1,8 @@
 import styled from "@emotion/styled";
-import { HoverSpanProps } from "./TodoModalContent.d";
+
+interface HoverSpanProps {
+  size?: string;
+}
 
 export const Header = styled.div({
   display: "flex",

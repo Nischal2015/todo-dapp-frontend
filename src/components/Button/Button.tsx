@@ -1,5 +1,22 @@
-import { ButtonProps } from "./Button.d";
+import { ComponentPropsWithoutRef, PropsWithChildren } from "react";
+import { Colors, Variant } from "~/types";
 import { StyledButton } from "./Styles";
+
+type ButtonVariant = {
+  variant?: Variant;
+  color?: Colors;
+};
+
+type BtnProps = {
+  onClick?: () => void;
+  disabled?: boolean;
+};
+
+type ButtonProps = PropsWithChildren<BtnProps> & {} & Omit<
+    ComponentPropsWithoutRef<"button">,
+    keyof BtnProps
+  > &
+  ButtonVariant;
 
 function Button({
   children,

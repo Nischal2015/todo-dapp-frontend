@@ -1,7 +1,7 @@
-import { ContainerProps } from "./Container.d";
+import { PropsWithChildren } from "react";
 import { StyledContainer } from "./Styles";
 
-function Container({ children }: ContainerProps) {
+function Container({ children }: PropsWithChildren) {
   return <StyledContainer>{children}</StyledContainer>;
 }
 

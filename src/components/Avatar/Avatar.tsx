@@ -1,5 +1,9 @@
-import { AvatarProps } from "./Avatar.d";
 import { StyledDiv, StyledImg } from "./Styles";
+
+interface AvatarProps {
+  src: string;
+  altText?: string;
+}
 
 function Avatar({ src, altText }: AvatarProps) {
   return (
