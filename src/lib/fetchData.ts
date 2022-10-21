@@ -43,7 +43,6 @@ export const fetchData = (): ReturnProps => {
   async function getAllTodo() {
     try {
       const todo = await TaskContract.getTasks();
-      console.log("getall todo running");
       setAllTodo(todo);
     } catch (error) {
       console.log(error);
