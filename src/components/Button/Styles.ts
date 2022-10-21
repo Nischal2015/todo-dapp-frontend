@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { ButtonVariant } from "./Button.d";
+import { ButtonVariant } from "./Button";
 
 export const StyledButton = styled.button<ButtonVariant>(
   {

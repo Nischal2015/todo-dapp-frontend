@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { StyledTypography } from "../Typography/Styles";
-import { TextFieldVariant } from "./TextField.d";
+import { TextFieldVariant } from "./TextField";
 
 export const StyledTextField = styled.input<TextFieldVariant>(
   {

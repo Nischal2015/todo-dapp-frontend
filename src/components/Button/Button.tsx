@@ -2,7 +2,7 @@ import { ComponentPropsWithoutRef, PropsWithChildren } from "react";
 import { Colors, Variant } from "~/types";
 import { StyledButton } from "./Styles";
 
-type ButtonVariant = {
+export type ButtonVariant = {
   variant?: Variant;
   color?: Colors;
 };

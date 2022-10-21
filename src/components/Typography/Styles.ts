@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { theme } from "../../context/emotion/emotion";
-import { StyledTypographyProps } from "./Typography.d";
+import { StyledTypographyProps } from "./Typography";
 
 export const StyledTypography = styled.p<StyledTypographyProps>(
   (props) => {
