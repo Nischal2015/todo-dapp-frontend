@@ -10,7 +10,6 @@ const StyledList = styled.div({
 });
 
 function List({ datas, column, updateTodo }: IListProps) {
-  console.log({ datas });
   return (
     <>
       <Typography as='h2'>{column.title}</Typography>
