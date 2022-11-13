@@ -21,7 +21,7 @@ export const StyledButton = styled.button<ButtonVariant>(
       width: "100%",
       opacity: "0",
       transition: "0.15s ease-in",
-      borderRadius: "4px",
+      borderRadius: "8px",
     },
     "&:hover:enabled::after": {
       opacity: 1,

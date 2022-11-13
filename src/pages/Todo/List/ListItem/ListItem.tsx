@@ -1,21 +1,16 @@
-import { ListItemProps } from "./ListItem.d";
-import {
-  Avatar,
-  Modal,
-  TaskDone,
-  TodoModalContent,
-  Typography,
-} from "~/components";
-import { Draggable } from "@hello-pangea/dnd";
-import { StyledDiv, StyledListItem } from "./Styles";
 import { useRef, useState } from "react";
+import { ListItemProps } from "./ListItem.d";
+import { TrashIcon } from "@heroicons/react/24/solid";
+import { Modal, TaskDone, TodoModalContent, Typography } from "~/components";
+import { Draggable } from "@hello-pangea/dnd";
+import { DeleteWrapper, StyledDiv, StyledListItem } from "./Styles";
 import { fetchData } from "~/lib/fetchData";
 
 function ListItem({ title, id, index }: ListItemProps) {
   const [openModal, setOpenModal] = useState(false);
   const titleRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
-  const { getTodo, todo, updateTodo } = fetchData();
+  const { getTodo, todo, updateTodo, deleteTodo } = fetchData();
 
   const taskId = Number(id.split("-")[1]) - 1;
 
@@ -32,20 +27,23 @@ function ListItem({ title, id, index }: ListItemProps) {
             {...provided.draggableProps}
             ref={provided.innerRef}
             isDragging={snapshot.isDragging && !snapshot.isDropAnimating}
-            onClick={() => {
-              getTodo(taskId);
-              setOpenModal(true);
-            }}
           >
             <TaskDone />
             <StyledDiv className='styledDiv'>
-              <Typography fontSize='1.6rem' color='secondary'>
-                {title}
-              </Typography>
-              <Avatar
-                altText='face'
-                src='https://www.planetware.com/wpimages/2020/02/france-in-pictures-beautiful-places-to-photograph-eiffel-tower.jpg'
-              />
+              <div
+                onClick={() => {
+                  getTodo(taskId);
+                  setOpenModal(true);
+                }}
+                style={{ flexGrow: 1, padding: "1.6rem 0" }}
+              >
+                <Typography fontSize='1.6rem' color='secondary'>
+                  {title}
+                </Typography>
+              </div>
+              <DeleteWrapper>
+                <TrashIcon fill='#321fb2' onClick={() => deleteTodo(taskId)} />
+              </DeleteWrapper>
             </StyledDiv>
           </StyledListItem>
         )}
