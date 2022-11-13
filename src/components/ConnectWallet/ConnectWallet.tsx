@@ -1,14 +1,18 @@
 import { useState } from "react";
 import { Button, Modal, Typography } from "~/components";
-import { useConnectWallet } from "~/hooks";
+import { IUseConnectWallet } from "~/hooks";
 import { BellAlertIcon } from "@heroicons/react/24/solid";
 import { StyledGrid, StyledFlexBox } from "./Styles";
 
-function ConnectWallet() {
-  const { currentAccount, correctNetwork, connectWallet, disable } =
-    useConnectWallet();
+function ConnectWallet({
+  currentAccount,
+  correctNetwork,
+  connectWallet,
+  disable,
+  setCorrectNetwork,
+  walletExistCheck,
+}: IUseConnectWallet) {
   const [openModal, setOpenModal] = useState(!correctNetwork);
-  const { walletExistCheck, setCorrectNetwork } = useConnectWallet();
 
   const onClickHandler = async () => {
     try {
