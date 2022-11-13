@@ -1,7 +1,7 @@
 import detectEthereumProvider from "@metamask/detect-provider";
 import { useEffect, useState } from "react";
 
-interface IUseConnectWallet {
+export interface IUseConnectWallet {
   walletExistCheck: () => any;
   currentAccount: string | undefined;
   correctNetwork: boolean;
