@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { Button, Modal, TodoModalContent } from "~/components";
 import { PlusIcon } from "@heroicons/react/24/solid";
 import { CreateTodoProps } from "./CreateTodo.d";
+import { ButtonItemSpan, ButtonWrapper } from "./Styles";
 
 function CreateTodo({ addTodo }: CreateTodoProps) {
   const [openModal, setOpenModal] = useState(false);
@@ -14,10 +15,14 @@ function CreateTodo({ addTodo }: CreateTodoProps) {
 
   return (
     <>
-      <Button onClick={() => setOpenModal(true)}>
-        <PlusIcon height={22} />
-        Create New Todo
-      </Button>
+      <ButtonWrapper>
+        <Button onClick={() => setOpenModal(true)}>
+          <ButtonItemSpan>
+            <PlusIcon height={22} />
+            Create New Todo
+          </ButtonItemSpan>
+        </Button>
+      </ButtonWrapper>
       <Modal
         openModal={openModal}
         setOpenModal={setOpenModal}

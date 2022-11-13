@@ -1,8 +1,11 @@
 import { useState } from "react";
-import { Button, Modal, Typography } from "~/components";
+import { Button, Container, Modal, Typography } from "~/components";
 import { IUseConnectWallet } from "~/hooks";
 import { BellAlertIcon } from "@heroicons/react/24/solid";
 import { StyledGrid, StyledFlexBox } from "./Styles";
+import { CreateTodo, Hero, Todo } from "~/pages";
+import { apiDataShaper } from "~/utils";
+import { fetchData, TodoProps } from "~/lib/fetchData";
 
 function ConnectWallet({
   currentAccount,
@@ -11,8 +14,10 @@ function ConnectWallet({
   disable,
   setCorrectNetwork,
   walletExistCheck,
-}: IUseConnectWallet) {
+  allTodo,
+}: IUseConnectWallet & { allTodo: TodoProps[] }) {
   const [openModal, setOpenModal] = useState(!correctNetwork);
+  const { addTodo, updateTodo } = fetchData();
 
   const onClickHandler = async () => {
     try {
@@ -60,15 +65,19 @@ function ConnectWallet({
           }
         />
       );
-    return <Typography>Connected Account: {currentAccount}</Typography>;
+    return (
+      <Container>
+        <Typography>Connected Account: {currentAccount}</Typography>
+        <CreateTodo addTodo={addTodo} />
+        <Todo datas={apiDataShaper(allTodo)} updateTodo={updateTodo} />
+      </Container>
+    );
   };
 
   return (
     <div>
       {!currentAccount ? (
-        <Button onClick={connectWallet} disabled={disable}>
-          Connect Wallet
-        </Button>
+        <Hero disable={disable} buttonHandler={connectWallet} />
       ) : (
         correctNetworkElement()
       )}

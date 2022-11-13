@@ -25,7 +25,7 @@ export const apiDataShaper = (datas: TodoProps[]) => {
     columns: {
       completed: {
         id: "completed",
-        title: "Completed",
+        title: "To Do",
         taskIds: [],
       },
     },
