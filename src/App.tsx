@@ -1,17 +1,17 @@
 import { useEffect } from "react";
 import { ConnectWallet } from "./components";
+import { useTransaction } from "./context";
 import { useConnectWallet } from "./hooks";
-import { fetchData } from "./lib/fetchData";
 
 function App() {
   const connectWallet = useConnectWallet();
-  const { getAllTodo, allTodo } = fetchData();
+  const { isTransacting } = useTransaction();
 
   useEffect(() => {
-    connectWallet.currentAccount && getAllTodo();
-  }, [connectWallet.currentAccount]);
+    document.body.style.overflow = isTransacting ? "hidden" : "unset";
+  }, [isTransacting]);
 
-  return <ConnectWallet {...connectWallet} allTodo={allTodo} />;
+  return <ConnectWallet {...connectWallet} />;
 }
 
 export default App;

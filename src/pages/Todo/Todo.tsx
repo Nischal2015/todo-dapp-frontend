@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { DragDropContext } from "@hello-pangea/dnd";
 import { List } from "./List";
 import { TodoProps } from "./Todo.d";
+import { fetchData } from "~/lib/fetchData";
 
-function Todo({ datas, updateTodo }: TodoProps) {
+function Todo({ datas }: TodoProps) {
   const [initialData, setInitialData] = useState(datas);
+  const { updateTodo } = fetchData();
   const onDragEnd = (result: any) => {
     const { draggableId, destination, source } = result;
     if (!destination) return;
@@ -49,14 +51,7 @@ function Todo({ datas, updateTodo }: TodoProps) {
           (taskId: string) =>
             initialData.todos[taskId as keyof typeof datas.todos]
         );
-        return (
-          <List
-            key={column.id}
-            datas={tasks}
-            column={column}
-            updateTodo={updateTodo}
-          />
-        );
+        return <List key={column.id} datas={tasks} column={column} />;
       })}
     </DragDropContext>
   );

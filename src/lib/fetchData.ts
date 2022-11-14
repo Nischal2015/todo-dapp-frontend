@@ -1,5 +1,6 @@
 import { ethers } from "ethers";
 import { useState } from "react";
+import { useTransaction } from "~/context";
 import abi from "../abi/TaskContract.json";
 
 export type TodoProps = {
@@ -10,18 +11,21 @@ export type TodoProps = {
 };
 
 type ReturnProps = {
-  allTodo: TodoProps[];
   todo: any;
-  getAllTodo(): void;
-  addTodo(title: string, description: string): void;
+  getAllTodo(): Promise<TodoProps[]>;
+  addTodo: (title: string, description: string) => Promise<TodoProps[]>;
   getTodo(taskId: number): void;
-  updateTodo(taskId: number, title: string, description: string): void;
-  deleteTodo(taskId: number): void;
+  updateTodo: (
+    taskId: number,
+    title: string,
+    description: string
+  ) => Promise<TodoProps[]>;
+  deleteTodo(taskId: number): Promise<TodoProps[]>;
 };
 
 export const fetchData = (): ReturnProps => {
-  let [allTodo, setAllTodo] = useState<TodoProps[]>([]);
-  let [todo, setTodo] = useState([]);
+  const [todo, setTodo] = useState([]);
+  const { setIsTransacting } = useTransaction();
   let TaskContract: ethers.Contract;
   try {
     const { ethereum } = window;
@@ -40,23 +44,26 @@ export const fetchData = (): ReturnProps => {
     console.error(error);
   }
 
-  async function getAllTodo() {
+  async function getAllTodo(): Promise<TodoProps[]> {
     try {
       const todo = await TaskContract.getTasks();
-      setAllTodo(todo);
+      console.log("get all todo running");
+      setIsTransacting(false);
+      return todo;
     } catch (error) {
-      console.log(error);
+      return error as any;
     }
   }
 
   async function addTodo(title: string, description: string) {
     try {
+      setIsTransacting(true);
       const addedTodo = await TaskContract.addTask(title, description, false);
       await addedTodo.wait();
     } catch (error) {
       console.log(error);
     } finally {
-      await getAllTodo();
+      return await getAllTodo();
     }
   }
 
@@ -75,29 +82,33 @@ export const fetchData = (): ReturnProps => {
     description: string
   ) {
     try {
+      setIsTransacting(true);
       const updatedTodo = await TaskContract.updateTask(
         taskId,
         title,
         description
       );
-      updatedTodo.wait();
+      await updatedTodo.wait();
     } catch (error) {
       console.log(error);
     } finally {
-      await getAllTodo();
+      return await getAllTodo();
     }
   }
 
   async function deleteTodo(taskId: number) {
     try {
-      await TaskContract.deleteTask(taskId);
+      setIsTransacting(true);
+      const deleteTodo = await TaskContract.deleteTask(taskId);
+      await deleteTodo.wait();
     } catch (error) {
       console.log(error);
+    } finally {
+      return await getAllTodo();
     }
   }
 
   return {
-    allTodo,
     todo,
     getAllTodo,
     addTodo,

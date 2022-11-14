@@ -14,5 +14,4 @@ interface Columns {
 export interface IListProps {
   datas: ListProps[];
   column: Columns;
-  updateTodo(taskId: number, title: string, description: string): void;
 }

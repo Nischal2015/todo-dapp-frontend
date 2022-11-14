@@ -9,25 +9,21 @@ const StyledList = styled.div({
   flexDirection: "column",
 });
 
-function List({ datas, column, updateTodo }: IListProps) {
+function List({ datas, column }: IListProps) {
   return (
     <>
       <Typography as='h2'>{column.title}</Typography>
       <Droppable droppableId={column.id}>
         {(provided) => (
           <StyledList ref={provided.innerRef} {...provided.droppableProps}>
-            {datas.map(
-              (data: ListProps, index: number) =>
-                data && (
-                  <ListItem
-                    key={data?.id}
-                    title={data?.title}
-                    id={data?.id}
-                    index={index}
-                    updateTodo={updateTodo}
-                  />
-                )
-            )}
+            {datas.map((data: ListProps, index: number) => (
+              <ListItem
+                key={data.id}
+                title={data.title}
+                id={data.id}
+                index={index}
+              />
+            ))}
             {provided.placeholder}
           </StyledList>
         )}

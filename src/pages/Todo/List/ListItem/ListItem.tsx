@@ -5,17 +5,25 @@ import { Modal, TaskDone, TodoModalContent, Typography } from "~/components";
 import { Draggable } from "@hello-pangea/dnd";
 import { DeleteWrapper, StyledDiv, StyledListItem } from "./Styles";
 import { fetchData } from "~/lib/fetchData";
+import { useTodo } from "~/context";
 
 function ListItem({ title, id, index }: ListItemProps) {
   const [openModal, setOpenModal] = useState(false);
   const titleRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
   const { getTodo, todo, updateTodo, deleteTodo } = fetchData();
+  const { setTodos } = useTodo();
 
   const taskId = Number(id.split("-")[1]) - 1;
 
-  const buttonClickHandler = () => {
-    updateTodo(taskId, titleRef.current!.value, descriptionRef.current!.value);
+  const buttonClickHandler = async () => {
+    setOpenModal(false);
+    const latestTodo = await updateTodo(
+      taskId,
+      titleRef.current!.value,
+      descriptionRef.current!.value
+    );
+    setTodos(latestTodo);
   };
 
   return (
@@ -42,7 +50,13 @@ function ListItem({ title, id, index }: ListItemProps) {
                 </Typography>
               </div>
               <DeleteWrapper>
-                <TrashIcon fill='#321fb2' onClick={() => deleteTodo(taskId)} />
+                <TrashIcon
+                  fill='#321fb2'
+                  onClick={async () => {
+                    const latestTask = await deleteTodo(taskId);
+                    setTodos(latestTask);
+                  }}
+                />
               </DeleteWrapper>
             </StyledDiv>
           </StyledListItem>
