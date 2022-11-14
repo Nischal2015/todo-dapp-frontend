@@ -36,10 +36,7 @@ export const StyledModal = styled.div<ModalVariant>(
 
 export const StyledModalOverlay = styled.div({
   position: "fixed",
-  top: "0",
-  left: "0",
-  height: "100%",
-  width: "100%",
+  inset: 0,
   zIndex: "50",
   backgroundColor: "rgba(5,3,12,0.6)",
   backdropFilter: "blur(10px)",

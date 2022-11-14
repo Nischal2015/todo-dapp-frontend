@@ -8,6 +8,8 @@ export * from "./ConnectWallet";
 
 export * from "./Container";
 
+export * from "./Loading";
+
 export * from "./Modal";
 
 export * from "./TaskDone";
