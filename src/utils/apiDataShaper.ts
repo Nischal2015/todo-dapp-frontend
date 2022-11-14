@@ -32,7 +32,7 @@ export const apiDataShaper = (datas: TodoProps[]) => {
     columnOrder: ["completed"],
   };
 
-  datas.map((data, index) => {
+  datas.map((data) => {
     const todoArrayKey = ["id", "title", "description", "isDeleted"];
 
     let todoObject: TodoObjectProps = {
@@ -55,7 +55,7 @@ export const apiDataShaper = (datas: TodoProps[]) => {
       return todoObject;
     };
 
-    jsonShape.todos[`todo-${index + 1}`] = todoMapper(data);
+    jsonShape.todos[`todo-${data.taskId + 1}`] = todoMapper(data);
     jsonShape.columns.completed.taskIds.push(`todo-${data.taskId + 1}`);
   });
 
